@@ -14,4 +14,3 @@ def hamming_dist(dna1,dna2):
         if dna1[nucleotide] != dna2[nucleotide]:
             count += 1
     return count
-print(hamming_dist(dna1,dna2))
