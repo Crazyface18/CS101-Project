@@ -19,10 +19,3 @@ def s(dna):
         'T': countT
     }
     return(s)
-
-print(s(dna))
-
-
-
-
-
