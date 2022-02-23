@@ -23,28 +23,6 @@ def s(dna):
 print(s(dna))
 
 
-# In[60]:
-
-
-#Test function 
-dna ='AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC'
-def s(dna):
-    countA = dna.count('A')
-    countC = dna.count('C')
-    countG = dna.count('G')
-    countT = dna.count('T')
-    s = {
-        'A': countA,
-        'C': countC, 
-        'G': countG, 
-        'T': countT
-    }
-    return(s)
-print(s(dna))
-
-
-# In[ ]:
-
 
 
 
