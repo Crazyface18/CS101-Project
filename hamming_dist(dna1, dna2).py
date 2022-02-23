@@ -15,26 +15,3 @@ def hamming_dist(dna1,dna2):
             count += 1
     return count
 print(hamming_dist(dna1,dna2))
-
-
-# In[106]:
-
-
-# Test Function 
-dna1 = "GAGCCTACTAACGGGAT"
-dna2 = "CATCGTAATGACGGCCT"
-def hamming_dist(dna1,dna2):
-    count = 0
-    x = len(dna1)
-    for nucleotide in range(0,x):
-        if dna1[nucleotide] != dna2[nucleotide]:
-            count += 1
-    return count
-print(hamming_dist(dna1,dna2))
-
-
-# In[ ]:
-
-
-
-
