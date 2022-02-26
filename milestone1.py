@@ -39,7 +39,7 @@ def fibonacci_rabbits(n,k):
     elif n == 1:
         return (1)
     elif n == 2:
-        return (1)
+        return (2)
     elif n > 2:
         return (fibonacci_rabbits(n-1,k) + k*fibonacci_rabbits(n-2,k))
     else:
