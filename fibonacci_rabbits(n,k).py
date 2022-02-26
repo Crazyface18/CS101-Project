@@ -13,22 +13,3 @@ def fibonacci_rabbits(n,k):
         return (fibonacci_rabbits(n-1,k) + k*fibonacci_rabbits(n-2,k))
     else:
         return (none)
-
-
-# In[ ]:
-
-
-
-
-
-# In[3]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
