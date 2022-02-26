@@ -1,0 +1,14 @@
+def locate_substring(dna_snippet, dna):
+    start = 0
+    end = len(dna)
+    x = 0
+    postion = []
+    for start in range (0, len(dna)):
+        start = x + 1
+        x = dna.find(dna_snippet, start, end)
+        if x > -1:
+            postion.append(x)
+        if x <= 0:
+            break
+    return(postion)
+print(locate_substring(dna_snippet, dna))
