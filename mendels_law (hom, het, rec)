@@ -1,0 +1,11 @@
+def mendels_law(hom, het, rec):
+    g_total = (hom + het + rec)
+    n_total = (g_total*(g_total-1))*2
+    rec_total = (rec*(rec-1))*2
+    het_total = (het*(het-1))/2
+    mixed_total = het*rec*2
+    r_total = rec_total + het_total+ mixed_total
+    P_dom = 1 - (r_total / n_total)
+    return(P_dom)
+
+print(mendels_law(0, 4, 0))
