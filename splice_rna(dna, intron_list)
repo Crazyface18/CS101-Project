@@ -1,0 +1,93 @@
+def locate_substring(dna_snippet, dna):
+    start = 0
+    end = len(dna)
+    x = 0
+    postion = []
+    for start in range (0, len(dna)):
+        start = x + 1
+        x = dna.find(dna_snippet, start, end)
+        if x > -1:
+            postion.append(x)
+        if x <= 0:
+            break
+    return(postion)
+
+#This is a new function unique to this one.
+def intron_cut(dna, intron_list):
+    i = 0
+    intron=[]
+    OrgDna=dna
+    L=0
+    # return the postion of the introns
+    for i in range(0,len(intron_list)):
+        dna_snippet = intron_list[i]
+        j = locate_substring(dna_snippet, dna)[0]
+        intron.append(j)
+        if i == len(intron_list):
+            break
+    for i in range(0,len(intron)):
+        One_slice = slice(intron[i]-L,intron[i]+len(intron_list[i])-L)
+        dna = dna.replace(dna[One_slice], '')
+        L=len(OrgDna)-len(dna)
+        if i == len(intron):
+            break
+    return(dna)
+
+# This code is taken from Zylleee 
+def dna2rna(dna):
+    rna = ""
+    for symbol in dna:
+        if symbol == 'A':
+            rna = rna + 'A'
+        elif symbol == 'T':
+            rna = rna + 'U'
+        elif symbol == 'G':
+            rna = rna + 'G'
+        elif symbol == 'C':
+            rna = rna + 'C'
+    return rna
+            
+# This code is taken from Chase: 
+#This is the initial list of RNA proteins.
+RNAList = {'UUU':'F', 'CUU':'L', 'AUU':'I', 'GUU':'V',
+'UUC':'F', 'CUC':'L', 'AUC':'I', 'GUC':'V',
+'UUA':'L', 'CUA':'L', 'AUA':'I', 'GUA':'V',
+'UUG':'L', 'CUG':'L', 'AUG':'M', 'GUG':'V',
+'UCU':'S', 'CCU':'P', 'ACU':'T', 'GCU':'A',
+'UCC':'S', 'CCC':'P', 'ACC':'T', 'GCC':'A',
+'UCA':'S', 'CCA':'P', 'ACA':'T', 'GCA':'A',
+'UCG':'S', 'CCG':'P', 'ACG':'T', 'GCG':'A',
+'UAU':'Y', 'CAU':'H', 'AAU':'N', 'GAU':'D',
+'UAC':'Y', 'CAC':'H', 'AAC':'N', 'GAC':'D',
+'UAA':' ', 'CAA':'Q', 'AAA':'K', 'GAA':'E',
+'UAG':' ', 'CAG':'Q', 'AAG':'K', 'GAG':'E',
+'UGU':'C', 'CGU':'R', 'AGU':'S', 'GGU':'G',
+'UGC':'C', 'CGC':'R', 'AGC':'S', 'GGC':'G',
+'UGA':' ', 'CGA':'R', 'AGA':'R', 'GGA':'G',
+'UGG':'W', 'CGG':'R', 'AGG':'R', 'GGG':'G',
+}
+#This is the actual function that returns the corresponding codon for an RNA protein sequence.
+def rna2codon(rna):
+    codon = ''
+    for i in range(0, len(rna), 3):
+        codon += RNAList[rna[i:i+3]]
+    return codon
+
+Dna = "ATGGTCTACATAGCTGACAAACAGCACGTAGCAATCGGTCGAATCTCGAGAGGCATATGGTCACATGATCGGTCGAGCGTGTTTCAAAGTTTGCGCCTAG"
+intron_list = ["ATCGGTCGAA", "ATCGGTCGAGCGTGT"]
+
+def splice_rna(dna, intron_list):
+    protein = ''
+    
+    i = 0
+    intron=[]
+    # return the postion of the introns
+    dna = intron_cut(dna, intron_list)
+    # Convert the string from DNA to RNA.
+    rna = dna2rna(dna)
+    
+    # Convert the RNA string to its corresponding protein expression string.
+    protein = rna2codon(rna)
+    
+    # Return the resulting string.
+    return (protein)
