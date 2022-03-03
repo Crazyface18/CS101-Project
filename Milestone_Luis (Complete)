@@ -1,0 +1,63 @@
+#Return the percentage of dominant alles giving a combination of homozygous dominant, homozygous recessive and heterozygous.
+def mendels_law(hom, het, rec):
+    g_total = (hom + het + rec)
+    n_total = (g_total*(g_total-1))*2
+    rec_total = (rec*(rec-1))*2
+    het_total = (het*(het-1))/2
+    mixed_total = het*rec*2
+    r_total = rec_total + het_total+ mixed_total
+    P_dom = 1 - (r_total / n_total)
+    return(P_dom)
+    
+# Given a section of dna, this will return the location of that slice in a dna. 
+def locate_substring(dna_snippet, dna):
+    start = 0
+    end = len(dna)
+    x = 0
+    postion = []
+    for start in range (0, len(dna)):
+        start = x + 1
+        x = dna.find(dna_snippet, start, end)
+        if x > -1:
+            postion.append(x)
+        if x <= 0:
+            break
+    return(postion)
+   
+# Cuts the pieces of a given introns list in a dna
+def intron_cut(dna, intron_list):
+    i = 0
+    intron=[]
+    OrgDna=dna
+    L=0
+    # return the postion of the introns
+    for i in range(0,len(intron_list)):
+        dna_snippet = intron_list[i]
+        j = locate_substring(dna_snippet, dna)[0]
+        intron.append(j)
+        if i == len(intron_list):
+            break
+    for i in range(0,len(intron)):
+        One_slice = slice(intron[i]-L,intron[i]+len(intron_list[i])-L)
+        dna = dna.replace(dna[One_slice], '')
+        L=len(OrgDna)-len(dna)
+        if i == len(intron):
+            break
+    return(dna)
+    
+#Converts a dna into to a protein after getting rid of the introns.
+def splice_rna(dna, intron_list):
+    protein = ''
+    
+    i = 0
+    intron=[]
+    # the the intron out
+    dna = intron_cut(dna, intron_list)
+    # Convert the string from DNA to RNA.
+    rna = dna2rna(dna)
+    
+    # Convert the RNA string to its corresponding protein expression string.
+    protein = rna2codon(rna)
+    
+    # Return the resulting string.
+    return (protein)
