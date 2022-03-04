@@ -198,16 +198,15 @@ def mendels_law(hom, het, rec):
     
 # Given a section of dna, this will return the location of that slice in a dna. 
 def locate_substring(dna_snippet, dna):
-    start = 0
-    end = len(dna)
-    x = 0
+    x = -1
     postion = []
-    for start in range (0, len(dna)):
+    for i in range (0, len(dna)):
         start = x + 1
-        x = dna.find(dna_snippet, start, end)
+        x = x + 1
+        x = dna.find(dna_snippet, start, len(dna))
         if x > -1:
             postion.append(x)
-        if x <= 0:
+        if x < 0:
             break
     return(postion)
    
@@ -249,8 +248,6 @@ def splice_rna(dna, intron_list):
     # Return the resulting string.
     return (protein)
 
-
-# In[ ]:
 
 
 
