@@ -27,28 +27,3 @@ def rev_palindrome(dna):
             elif reverse_compliment(dna[x:x+y]) == dna[x:x+y]:#this checks the currently selected substring against it's equivalent reverse complement. If they are equal, it saves the position and length.
                 tuples.append(tuple([x,y]))
     return (tuples)
-
-
-# In[2]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
